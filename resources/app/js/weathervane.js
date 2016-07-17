@@ -11,18 +11,21 @@ var Userdata = React.createClass({
 getInitialState: function(){
 return {	
 falsekeyalert: 'unshown',
-verify: localStorage.getItem('state')
+verify: localStorage.getItem('state'),
+setinstone: false
 }},
 
 checkval: function(){
 localStorage.setItem('yourid', document.getElementById('userkey').value);	
 var processappkey = localStorage.getItem('yourid');
+//weather script to test if api key is right//
 var weather = new XMLHttpRequest();
 var deesfault = "Houston, Texas";
 weather.open("GET", "http://api.openweathermap.org/data/2.5/weather?q="+deesfault+"&units=imperial&appid="+processappkey, false);
 weather.send(null);
 var r = JSON.parse(weather.response);
 var check = r.main.temp;
+//end of weather script to test if api key is right//
 if (check){
 localStorage.setItem('state', 'granted');
 this.setState({verify: 'granted'});
@@ -35,9 +38,8 @@ this.setState({verify: 'denied'});
 },
 
 render:function(){
-
 if (this.state.verify === 'granted'){
-
+//main weather script//
 var processappkey = localStorage.getItem('yourid');
 var weather = new XMLHttpRequest();
 var deesfault = "Houston, Texas";
@@ -45,7 +47,9 @@ weather.open("GET", "http://api.openweathermap.org/data/2.5/weather?q="+deesfaul
 weather.send(null);	
 var r = JSON.parse(weather.response);
 var check = r.main.temp;
+var humidity = r.main.humidity;
 var theicon = r.weather[0].icon;
+var weatherdescription = r.weather[0].description;
 
 if ((theicon == "04d") || (theicon == "04n"))
 {var theiconresult = "wi-cloudy";}	
@@ -71,11 +75,16 @@ else if (theicon == "02d")
 {var theiconresult = "wi-day-cloudy";}
 else if (theicon == "02n")
 {var theiconresult = "wi-night-alt-cloudy";}		
+//end of main weather script//
 	
 return (<div id="mainapp">
 <h3>{deesfault}</h3>
 <i className={"wi "+theiconresult+" weathermane"}></i>
 <h2>{check}&deg;</h2>
+
+<p>{weatherdescription}</p>
+<p>humidity: {humidity}</p>
+
 </div>);	
 }	
 	
