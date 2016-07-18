@@ -3,9 +3,9 @@ $tc: whitesmoke;
 /*defaults*/
 body { background: violet; color: $tc;}
 p {font-family: 'Roboto Condensed', sans-serif; }
-h4 {font-size: 40px; margin-bottom: 0px;}
+h4 {font-size: 30px; margin-bottom: 0px;}
 h3 {font-size: 48px; margin-top: 15px;}
-h1, h3, h4 {font-weight: 100; font-family: 'Alegreya Sans', sans-serif; }
+h1, h3, h4, li {font-weight: 100; font-family: 'Alegreya Sans', sans-serif; }
 ul, li {list-style-type: none;}
 h1 {text-align: center; border-bottom: 1px solid $tc;}
 h2 {font-size: 25px;}
@@ -19,3 +19,4 @@ a {color: maroon;}
 .shown {display: block;}
 #mainapp {text-align: center;}
 .weathermane {font-size: 40px;}
+#newplace {display: block; margin: 0 auto; margin-bottom: 20px;color: black;}

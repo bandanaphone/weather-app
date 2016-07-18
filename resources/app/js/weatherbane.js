@@ -15,7 +15,8 @@ falsekeyalert: 'unshown',
 verify: localStorage.getItem('state'),
 setinstone: true,
 deesfault: 'Houston, Texas',
-main: ''
+main: '',
+weather: [{icon: '', description: ''}]
 }},
 
 checkval: function(){
@@ -43,6 +44,7 @@ localStorage.setItem('state', 'granted');
 this.setState({verify: 'granted'});
 }
 },
+
 //main weather view//
 mainweather: function(){
 if (this.state.setinstone){return(
@@ -59,30 +61,31 @@ this.setState({setinstone: false});
 },
 
 setitinstone: function(){
-this.setState({deesfault: document.getElementById('newplace').value})	
+this.setState({deesfault: document.getElementById('newplace').value});	
 this.setState({setinstone: true});	
 },
 
-componentDidMount: function(){
+callthebase: function(){
 var selfish = this;
 var processappkey = localStorage.getItem('yourid');
-$.get('http://api.openweathermap.org/data/2.5/weather?q='+selfish.state.deesfault+"&units=imperial&appid="+processappkey, function(data){
+$.get('http://api.openweathermap.org/data/2.5/weather?q='+this.state.deesfault+"&units=imperial&appid="+processappkey, function(data){
 selfish.setState(data);	
-});	
+});		
+},
+
+componentDidMount: function(){
+return this.callthebase();
+},
+
+componentDidUpdate: function(){
+if (this.state.setinstone){
+return this.callthebase();}
 },
 
 render:function(){
 if (this.state.verify === 'granted'){
 //main weather script//
-var processappkey = localStorage.getItem('yourid');
-var weather = new XMLHttpRequest();
-weather.open("GET", "http://api.openweathermap.org/data/2.5/weather?q="+this.state.deesfault+"&units=imperial&appid="+processappkey, false);
-weather.send(null);	
-var r = JSON.parse(weather.response);
-var check = r.main.temp;
-var humidity = r.main.humidity;
-var theicon = r.weather[0].icon;
-var weatherdescription = r.weather[0].description;
+var theicon = this.state.weather[0].icon;
 
 if ((theicon == "04d") || (theicon == "04n"))
 {var theiconresult = "wi-cloudy";}	
@@ -113,11 +116,9 @@ else if (theicon == "02n")
 return (<div id="mainapp">
 {this.mainweather()}
 <i className={"wi "+theiconresult+" weathermane"}></i>
-<p>{this.state.main.temp}sdsdsd</p>
-<h2>{check}&deg;</h2>
-
-<p>{weatherdescription}</p>
-<p>humidity: {humidity}</p>
+<h2>{this.state.main.temp}&deg;</h2>
+<p>{this.state.weather[0].description}</p>
+<p>humidity: {this.state.main.humidity}</p>
 
 </div>);	
 }	
