@@ -32,6 +32,9 @@ h2 {
 h3 {
   font-size: 30px; }
 
+h4 {
+  font-size: 22px; }
+
 a {
   color: maroon; }
 
@@ -60,10 +63,60 @@ a {
 .weathermane {
   font-size: 40px; }
 
+.forecastmane {
+  font-size: 20px; }
+
 #newplace {
   display: block;
   margin: 0 auto;
   margin-bottom: 20px;
   color: black; }
+
+/*added features*/
+#featureslist {
+  margin-top: 20px; }
+
+#featureslist li {
+  font-size: 18px;
+  border: 1px solid whitesmoke;
+  cursor: pointer;
+  margin-bottom: 4px; }
+
+.newheather {
+  border-bottom: 1px solid whitesmoke;
+  text-align: left;
+  margin-left: 15px; }
+
+.panelplace {
+  text-align: left; }
+
+.foresection {
+  padding: 8px;
+  background: teal;
+  display: inline-block;
+  margin-right: 5px;
+  margin-left: 5px;
+  margin-bottom: 5px;
+  width: 135px; }
+
+.foresection table {
+  margin: 0 auto; }
+
+.foresection td {
+  padding-right: 30px;
+  padding-left: 10px; }
+
+td {
+  font-size: 16px; }
+
+#forecastinit {
+  background: teal; }
+
+#timeinit {
+  background: tomato; }
+
+.featureheader {
+  margin-bottom: 15px;
+  font-size: 20px; }
 
 /*# sourceMappingURL=styles.css.map */
